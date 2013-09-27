@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    
+    <!-- POM padrao para desenvolvimento de aplicativos usando
+         as tecnologias JEE6: CDI + Seam Solder + Seam Persistence 
+         + Seam Faces + RestEasy -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>archetype.it</groupId>
+	<artifactId>basic</artifactId>
+	<packaging>war</packaging>
+	<version>0.1-SNAPSHOT</version>
+	<name>Nome da Aplicacao WEB</name>
+
+	<properties>
+		<internal.repo.path>file:\\C:\mvn-repo</internal.repo.path>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+
+  	<distributionManagement>
+     		<repository>
+        		<id>internal.repo</id>
+        		<name>Internal Repository</name>
+        		<url>${internal.repo.path}</url>
+     		</repository>
+  	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>JBOSS_NEXUS</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public</url>
+		</repository>
+
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Technology Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.spec</groupId>
+				<artifactId>jboss-javaee-web-6.0</artifactId>
+				<version>2.0.0.Final</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.richfaces</groupId>
+				<artifactId>richfaces-bom</artifactId>
+				<version>4.3.3.Final</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- JUnit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- CDI -->
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JSF -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.faces</groupId>
+			<artifactId>jboss-jsf-api_2.0_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Richfaces -->
+		<dependency>
+			<groupId>org.richfaces.ui</groupId>
+			<artifactId>richfaces-components-ui</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.richfaces.core</groupId>
+			<artifactId>richfaces-core-impl</artifactId>
+		</dependency>
+
+		<!-- Primefaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>3.5</version>
+		</dependency>
+
+		<!-- Servlet -->
+		<dependency>
+			<groupId>org.jboss.spec.javax.servlet</groupId>
+			<artifactId>jboss-servlet-api_3.0_spec</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Praticamente todos os modulos do Seam 3 precisam do Solder -->
+		<dependency>
+			<groupId>org.jboss.solder</groupId>
+			<artifactId>solder-impl</artifactId>
+			<version>3.1.1.Final</version>
+		</dependency>
+
+		<!-- Seam Faces precisa do seam-international (mesmo que nao use) -->
+		<dependency>
+			<groupId>org.jboss.seam.international</groupId>
+			<artifactId>seam-international</artifactId>
+			<version>3.1.0.Final</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.solder</groupId>
+					<artifactId>solder-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<artifactId>solder-impl</artifactId>
+					<groupId>org.jboss.solder</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Seam International precisa do joda-time -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Seam Faces precisa do seam-transaction (mesmo que nao use) -->
+		<dependency>
+			<groupId>org.jboss.seam.transaction</groupId>
+			<artifactId>seam-transaction</artifactId>
+			<version>3.1.0.Final</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.solder</groupId>
+					<artifactId>solder-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.solder</groupId>
+					<artifactId>solder-impl</artifactId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jboss-servlet-api_3.0_spec</artifactId>
+					<groupId>org.jboss.spec.javax.servlet</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Seam Faces precisa do seam-persistence (mesmo que nao use) -->
+		<dependency>
+			<groupId>org.jboss.seam.persistence</groupId>
+			<artifactId>seam-persistence</artifactId>
+			<version>3.1.0.Final</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.solder</groupId>
+					<artifactId>solder-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.solder</groupId>
+					<artifactId>solder-impl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.seam.transaction</groupId>
+					<artifactId>seam-transaction</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.seam.transaction</groupId>
+					<artifactId>seam-transaction-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Seam Persistence precisa do Hibernate (mesmo que nao use) -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.1.4.Final</version>
+		</dependency>
+
+		<!-- Hibernate Validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
+		</dependency>
+
+		<!-- Seam Faces precisa do seam-security (mesmo que nao use) -->
+		<dependency>
+			<groupId>org.jboss.seam.security</groupId>
+			<artifactId>seam-security</artifactId>
+			<version>3.1.0.Final</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.seam.persistence</groupId>
+					<artifactId>seam-persistence</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.seam.solder</groupId>
+					<artifactId>seam-solder</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.solder</groupId>
+					<artifactId>solder-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.solder</groupId>
+					<artifactId>solder-impl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.seam.international</groupId>
+					<artifactId>seam-international-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.seam.international</groupId>
+					<artifactId>seam-international</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Seam Faces precisa do prettyfaces (mesmo que nao use) -->
+		<dependency>
+			<groupId>com.ocpsoft</groupId>
+			<artifactId>prettyfaces-jsf2</artifactId>
+			<version>3.3.3</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Seam Faces precisa do drools (mesmo que nao use) -->
+		<dependency>
+			<groupId>org.drools</groupId>
+			<artifactId>knowledge-api</artifactId>
+			<version>5.4.0.Final</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Enfim, o Seam Faces -->
+		<dependency>
+			<groupId>org.jboss.seam.faces</groupId>
+			<artifactId>seam-faces</artifactId>
+			<version>3.1.0.Final</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.solder</groupId>
+					<artifactId>solder-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.solder</groupId>
+					<artifactId>solder-impl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.seam.international</groupId>
+					<artifactId>seam-international-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Seam Remoting - Retirar caso nao necessite -->
+		<dependency>
+			<groupId>org.jboss.seam.remoting</groupId>
+			<artifactId>seam-remoting</artifactId>
+			<version>3.1.0.Final</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.solder</groupId>
+					<artifactId>solder-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.solder</groupId>
+					<artifactId>solder-impl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.jboss.seam.international</groupId>
+					<artifactId>seam-international-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+
+		<!-- RestEasy (se nao usar servicos, pode remover) -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxb-provider</artifactId>
+			<version>2.3.2.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson-provider</artifactId>
+			<version>2.3.2.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>2.3.2.Final</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javassist</groupId>
+					<artifactId>javassist</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-cdi</artifactId>
+			<version>2.3.2.Final</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javassist</groupId>
+					<artifactId>javassist</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+
+    <!-- Aqui alterar o nome para o nome da aplicacao -->
+	<build>
+		<finalName>NOME_APLICACAO</finalName>
+	</build>
+</project>

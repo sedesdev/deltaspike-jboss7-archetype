@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC 
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory name="primary">
+       <property name="hibernate.connection.datasource">java:jboss/datasources/ExampleDS</property>
+       <property name="hibernate.hbm2ddl.auto">create-drop</property>
+       <property name="hibernate.search.default.directory_provider">ram</property>
+       <property name="hibernate.show_sql">true</property>
+       <property name="hibernate.format_sql">false</property>
+       
+       <!-- Controle transacional JTA - Container -->
+       <property name="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</property>
+       <property name="hibernate.current_session_context_class">jta</property>
+       <property name="hibernate.transaction.factory_class">org.hibernate.engine.transaction.internal.jta.CMTTransactionFactory</property>
+       <property name="hibernate.transaction.jta.platform">org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform</property>
+       <property name="hibernate.connection.autocommit">true</property>
+       <property name="hibernate.transaction.auto_close_session">false</property>
+       <property name="hibernate.connection.release_mode">auto</property>       
+       
+       <!-- Mapeamentos -->
+       
+       <mapping resource="Pessoa.hbm.xml"/>
+    
+    </session-factory>
+    
+</hibernate-configuration> 

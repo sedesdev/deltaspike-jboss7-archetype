@@ -1,0 +1,19 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+	<datasource 
+		jndi-name="java:jboss/datasources/NOME_DS"
+		enabled="true" use-java-context="true" 
+		pool-name="NOME_DS">
+		<connection-url>jdbc:oracle:thin@localhost:1521:test</connection-url>
+		<driver>oracle</driver>
+		<security>
+			<user-name>foo</user-name>
+			<password>bar</password>
+		</security>
+		<min-pool-size>5</min-pool-size>
+		<max-pool-size>20</max-pool-size>
+	</datasource>
+</datasources>
