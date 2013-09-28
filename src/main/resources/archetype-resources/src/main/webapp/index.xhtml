@@ -1,0 +1,30 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui" 
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<rich:panel header="Cadastro de Pessoas" style="min-width:500px;width:600px;margin-right:auto;margin-left:auto;">
+			<h:form>
+								
+				<div>
+				    <p:inputText value="${symbol_pound}{pessoaViewController.nome}" />
+					<h:commandButton value="Inserir" action="${symbol_pound}{pessoaViewController.inserePessoa()}" />
+				</div>
+				
+			</h:form>
+			
+			<button onclick="javascript:addBid()">Chamar Javascript!</button>
+
+		</rich:panel>
+		
+		<br/>
+		
+	</ui:define>
+</ui:composition>
